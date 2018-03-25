@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.entity.Person;
 import com.example.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +17,14 @@ public class GymControl {
 
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
     //@ResponseBody
-    public List<Person> getAllPersons(){
+   /* public List<Person> getAllPersons(){
         List<Person> all = service.getAll();
         return all;
+    }*/
+    Page<Person> list(Pageable pageable){
+        Page<Person> all = service.getAll(pageable);
+        return all;
     }
-
     @RequestMapping(value = "/persons/{id}", method = RequestMethod.GET)
     //@ResponseBody
     public Person getPerson(@PathVariable("id") long personID){

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -22,6 +23,7 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories("com.example.repository")
 @EnableTransactionManagement
+@EnableSpringDataWebSupport
 @PropertySource("classpath:db.properties")
 @ComponentScan("com.example")
 public class DatabaseConfig {
