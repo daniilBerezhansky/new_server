@@ -15,16 +15,29 @@ public class GymControl {
     @Autowired
     PersonService service;
 
-    @RequestMapping(value = "/persons", method = RequestMethod.GET)
+   @RequestMapping(value = "/persons", method = RequestMethod.GET)
     //@ResponseBody
-   /* public List<Person> getAllPersons(){
+    public List<Person> getAllPersons() {
         List<Person> all = service.getAll();
         return all;
-    }*/
-    Page<Person> list(Pageable pageable){
-        Page<Person> all = service.getAll(pageable);
-        return all;
+
     }
+    @RequestMapping(
+            value = "/persons",
+            params = { "page", "size" },
+            method = RequestMethod.GET
+    )
+    public Page<Person> findPaginated(
+            @RequestParam("page") int page, @RequestParam("size") int size) {
+
+        Page<Person> resultPage = service.findPaginated(page, size);
+        if (page > resultPage.getTotalPages()) {
+            throw new HTTPException(228);
+        }
+
+        return resultPage;
+    }
+
     @RequestMapping(value = "/persons/{id}", method = RequestMethod.GET)
     //@ResponseBody
     public Person getPerson(@PathVariable("id") long personID){
