@@ -27,7 +27,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public Person save(Person person) {
-        return personRepository.save(person);
+        return personRepository.saveAndFlush(person);
     }
 
     public void remove(long personID) {
