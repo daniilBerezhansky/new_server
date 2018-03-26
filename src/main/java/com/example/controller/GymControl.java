@@ -23,7 +23,7 @@ public class GymControl {
 
     }
     @RequestMapping(
-            value = "/persons",
+            value = "/persons/list",
             params = { "page", "size" },
             method = RequestMethod.GET
     )
